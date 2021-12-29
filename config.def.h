@@ -175,6 +175,34 @@ static char urgbgcolor[]                 = "#222222";
 static char urgbordercolor[]             = "#ff0000";
 static char urgfloatcolor[]              = "#db8fd9";
 
+#if Colorful_Tags_Patch
+static char Red_Color[] = "#ea6962";
+static char Green_Color[] = "#a9b665";
+static char Yellow_Color[] = "#d8a657";
+static char Blue_Color[] = "#7daea3";
+static char Purple_Color[] = "#d3869b";
+static char Aqua_Color[] = "#89b482";
+static char Orange_Color[] = "#e78a4e";
+
+/*
+static char Alt_Red_Color[] = "#ae5858";
+static char Alt_Green_Color[] = "#6f8352";
+static char Alt_Yellow_Color[] = "#b4730e";
+static char Alt_Blue_Color[] = "#266b79";
+static char Alt_Purple_Color[] = "#924f79";
+static char Alt_Aqua_Color[] = "#477a5b";
+static char Alt_Orange_Color[] = "#f28534"; 
+*/
+
+static char Alt_Red_Color[] = "#fb4934";
+static char Alt_Green_Color[] = "#427b58";
+static char Alt_Yellow_Color[] = "#fabd2f";
+static char Alt_Blue_Color[] = "#458588";
+static char Alt_Purple_Color[] = "#b16286";
+static char Alt_Aqua_Color[] = "#83a598";
+static char Alt_Orange_Color[] = "#d79921";
+#endif // Colorful_Tags_Patch
+
 #if BAR_FLEXWINTITLE_PATCH
 static char normTTBbgcolor[]             = "#330000";
 static char normLTRbgcolor[]             = "#330033";
@@ -285,11 +313,33 @@ static char *colors[][ColCount] = {
 	[SchemeSel]          = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
 	[SchemeTitleNorm]    = { titlenormfgcolor, titlenormbgcolor, titlenormbordercolor, titlenormfloatcolor },
 	[SchemeTitleSel]     = { titleselfgcolor,  titleselbgcolor,  titleselbordercolor,  titleselfloatcolor },
-	[SchemeTagsNorm]     = { tagsnormfgcolor,  tagsnormbgcolor,  tagsnormbordercolor,  tagsnormfloatcolor },
-	[SchemeTagsSel]      = { tagsselfgcolor,   tagsselbgcolor,   tagsselbordercolor,   tagsselfloatcolor },
-	[SchemeHidNorm]      = { hidnormfgcolor,   hidnormbgcolor,   c000000,              c000000 },
-	[SchemeHidSel]       = { hidselfgcolor,    hidselbgcolor,    c000000,              c000000 },
-	[SchemeUrg]          = { urgfgcolor,       urgbgcolor,       urgbordercolor,       urgfloatcolor },
+	#if Colorful_Tags_Patch
+    [SchemeTagsNormA] = {Red_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsNormB] = {Green_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsNormC] = {Yellow_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsNormD] = {Blue_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsNormE] = {Purple_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsNormF] = {Aqua_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsNormG] = {Orange_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsNormH] = {Alt_Aqua_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsNormI] = {Alt_Red_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+
+    [SchemeTagsSelA] = {Red_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsSelB] = {Green_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsSelC] = {Yellow_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsSelD] = {Blue_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsSelE] = {Purple_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsSelF] = {Aqua_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsSelG] = {Orange_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsSelH] = {Alt_Aqua_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsSelI] = {Alt_Red_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+	#else
+    [SchemeTagsNorm] = {tagsnormfgcolor, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
+    [SchemeTagsSel] = {tagsselfgcolor, tagsselbgcolor, tagsselbordercolor, tagsselfloatcolor},
+	#endif // Colorful_Tags_Patch
+    [SchemeHidNorm] = {hidnormfgcolor, hidnormbgcolor, c000000, c000000},
+    [SchemeHidSel] = {hidselfgcolor, hidselbgcolor, c000000, c000000},
+    [SchemeUrg] = {urgfgcolor, urgbgcolor, urgbordercolor, urgfloatcolor},
 	#if BAR_FLEXWINTITLE_PATCH
 	[SchemeFlexActTTB]   = { titleselfgcolor,  actTTBbgcolor,    actTTBbgcolor,        c000000 },
 	[SchemeFlexActLTR]   = { titleselfgcolor,  actLTRbgcolor,    actLTRbgcolor,        c000000 },

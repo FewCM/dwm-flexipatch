@@ -55,10 +55,10 @@ draw_taglabels(Bar *bar, BarArg *a)
 			continue;
 		drw_setscheme(drw, scheme[
 			m->tagset[m->seltags] & 1 << i
-			? SchemeTagsSel
+			? SchemeTagsSelA + i
 			: urg & 1 << i
 			? SchemeUrg
-			: SchemeTagsNorm
+			: SchemeTagsNormA + i
 		]);
 		w = TEXTW(m->taglabel[i]);
 		drw_text(drw, x, a->y, w, a->h, lrpad / 2, m->taglabel[i], invert, False);

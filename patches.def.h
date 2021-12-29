@@ -10,6 +10,8 @@
  * here for grouping purposes.
  */
 #define Place_Dir_Patch 0
+
+#define Colorful_Tags_Patch 0
 /**
  * Bar modules
  */
