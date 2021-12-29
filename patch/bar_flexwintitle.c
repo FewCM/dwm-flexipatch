@@ -1,21 +1,21 @@
 /* Flexwintitle properties, you can override these in your config.h if you want. */
 #ifndef FLEXWINTITLE_BORDERS
-#define FLEXWINTITLE_BORDERS 1       // 0 = off, 1 = on
+#define FLEXWINTITLE_BORDERS 0       // 0 = off, 1 = on
 #endif
 #ifndef FLEXWINTITLE_SHOWFLOATING
-#define FLEXWINTITLE_SHOWFLOATING 0  // whether to show titles for floating windows, hidden clients are always shown
+#define FLEXWINTITLE_SHOWFLOATING 1  // whether to show titles for floating windows, hidden clients are always shown
 #endif
 #ifndef FLEXWINTITLE_MASTERWEIGHT
-#define FLEXWINTITLE_MASTERWEIGHT 9  // master weight compared to stack, hidden and floating window titles
+#define FLEXWINTITLE_MASTERWEIGHT 4  // master weight compared to stack, hidden and floating window titles
 #endif
 #ifndef FLEXWINTITLE_STACKWEIGHT
-#define FLEXWINTITLE_STACKWEIGHT 3   // stack weight compared to master, hidden and floating window titles
+#define FLEXWINTITLE_STACKWEIGHT 4   // stack weight compared to master, hidden and floating window titles
 #endif
 #ifndef FLEXWINTITLE_HIDDENWEIGHT
-#define FLEXWINTITLE_HIDDENWEIGHT 1  // hidden window title weight
+#define FLEXWINTITLE_HIDDENWEIGHT 3  // hidden window title weight
 #endif
 #ifndef FLEXWINTITLE_FLOATWEIGHT
-#define FLEXWINTITLE_FLOATWEIGHT 1   // floating window title weight, set to 0 to not show floating windows
+#define FLEXWINTITLE_FLOATWEIGHT 3   // floating window title weight, set to 0 to not show floating windows
 #endif
 
 #define SCHEMEFOR(c) getschemefor(m, c, groupactive == c)
@@ -86,11 +86,11 @@ getschemefor(Monitor *m, int group, int activegroup)
 		#endif // BSTACKHORIZ_LAYOUT
 		#if CENTEREDMASTER_LAYOUT
 		if (m->lt[m->sellt]->arrange == &centeredmaster)
-			return (activegroup ? SchemeFlexActTTB : SchemeFlexInaTTB);
+			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
 		#endif // CENTEREDMASTER_LAYOUT
 		#if CENTEREDFLOATINGMASTER_LAYOUT
 		if (m->lt[m->sellt]->arrange == &centeredfloatingmaster)
-			return (activegroup ? SchemeFlexActLTR : SchemeFlexInaLTR);
+			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
 		#endif // CENTEREDFLOATINGMASTER_LAYOUT
 		#if COLUMNS_LAYOUT
 		if (m->lt[m->sellt]->arrange == &col) {
@@ -110,11 +110,11 @@ getschemefor(Monitor *m, int group, int activegroup)
 		#endif // DECK_LAYOUT
 		#if FIBONACCI_DWINDLE_LAYOUT
 		if (m->lt[m->sellt]->arrange == &dwindle)
-			return (activegroup ? SchemeFlexActDWDL : SchemeFlexInaDWDL);
+			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
 		#endif // FIBONACCI_DWINDLE_LAYOUT
 		#if FIBONACCI_SPIRAL_LAYOUT
 		if (m->lt[m->sellt]->arrange == &spiral)
-			return (activegroup ? SchemeFlexActSPRL : SchemeFlexInaSPRL);
+			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
 		#endif // FIBONACCI_SPIRAL_LAYOUT
 		#if FLEXTILE_DELUXE_LAYOUT
 		if (m->lt[m->sellt]->arrange == &flextile)
@@ -122,11 +122,11 @@ getschemefor(Monitor *m, int group, int activegroup)
 		#endif // FLEXTILE_DELUXE_LAYOUT
 		#if GAPPLESSGRID_LAYOUT
 		if (m->lt[m->sellt]->arrange == &gaplessgrid)
-			return (activegroup ? SchemeFlexActGRID : SchemeFlexInaGRID);
+			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
 		#endif // GAPPLESSGRID_LAYOUT
 		#if GRIDMODE_LAYOUT
 		if (m->lt[m->sellt]->arrange == &grid)
-			return (activegroup ? SchemeFlexActGRDM : SchemeFlexInaGRDM);
+			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
 		#endif // GRIDMODE_LAYOUT
 		#if HORIZGRID_LAYOUT
 		if (m->lt[m->sellt]->arrange == &horizgrid)
@@ -138,7 +138,7 @@ getschemefor(Monitor *m, int group, int activegroup)
 		#endif // NROWGRID_LAYOUT
 		#if TILE_LAYOUT
 		if (m->lt[m->sellt]->arrange == &tile)
-			return (activegroup ? SchemeFlexActTTB : SchemeFlexInaTTB);
+			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
 		#endif // TILE_LAYOUT
 		#if MONOCLE_LAYOUT
 		if (m->lt[m->sellt]->arrange == &monocle)
@@ -148,7 +148,7 @@ getschemefor(Monitor *m, int group, int activegroup)
 	case GRP_HIDDEN:
 		return SchemeHidNorm;
 	case GRP_FLOAT:
-		return (activegroup ? SchemeFlexActFloat : SchemeFlexInaFloat);
+		return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
 	}
 	return SchemeTitleNorm;
 }
@@ -157,11 +157,11 @@ int
 getselschemefor(int scheme)
 {
 	if (scheme == SchemeFlexActFloat || scheme == SchemeFlexInaFloat)
-		return SchemeFlexSelFloat;
+		return SchemeTitleSel;
 	if (scheme >= SchemeFlexInaTTB)
-		return scheme + SchemeFlexInaTTB - SchemeFlexActTTB;
+		return scheme + SchemeTitleNorm - SchemeTitleNorm;
 	if (scheme >= SchemeFlexActTTB)
-		return scheme + SchemeFlexSelTTB - SchemeFlexActTTB;
+		return scheme + SchemeTitleNorm - SchemeTitleNorm;
 	return SchemeTitleSel;
 }
 
@@ -213,9 +213,10 @@ flextitledraw(Monitor *m, Client *c, int unused, int x, int w, int tabscheme, Ar
 		if ((c->tags >> i) & 1)
 			nclienttags++;
 	}
-
+	/*
 	if (TAGSINDICATOR == 2 || nclienttags > 1 || nviewtags > 1)
 		drawindicator(m, c, 1, x, barg->y, w, barg->h, 0, 0, 0, INDICATOR_RIGHT_TAGS);
+	*/
 }
 
 #ifndef HIDDEN
@@ -443,4 +444,3 @@ flextitlecalculate(
 	}
 	return 1;
 }
-
