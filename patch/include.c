@@ -2,6 +2,9 @@
 #include "bar_indicators.c"
 #include "bar_tagicons.c"
 
+#if Place_Dir_Patch
+#include "place_dir.c"
+#endif
 #if BAR_ALPHA_PATCH
 #include "bar_alpha.c"
 #endif
@@ -359,4 +362,3 @@
 #if TILE_LAYOUT
 #include "layout_tile.c"
 #endif
-
