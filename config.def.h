@@ -175,7 +175,7 @@ static char urgbgcolor[]                 = "#222222";
 static char urgbordercolor[]             = "#ff0000";
 static char urgfloatcolor[]              = "#db8fd9";
 
-#if Colorful_Tags_Patch
+#if COLORFUL_TAGS_PATCH
 static char Red_Color[] = "#ea6962";
 static char Green_Color[] = "#a9b665";
 static char Yellow_Color[] = "#d8a657";
@@ -201,7 +201,7 @@ static char Alt_Blue_Color[] = "#458588";
 static char Alt_Purple_Color[] = "#b16286";
 static char Alt_Aqua_Color[] = "#83a598";
 static char Alt_Orange_Color[] = "#d79921";
-#endif // Colorful_Tags_Patch
+#endif // COLORFUL_TAGS_PATCH
 
 #if BAR_FLEXWINTITLE_PATCH
 static char normTTBbgcolor[]             = "#330000";
@@ -313,7 +313,7 @@ static char *colors[][ColCount] = {
 	[SchemeSel]          = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
 	[SchemeTitleNorm]    = { titlenormfgcolor, titlenormbgcolor, titlenormbordercolor, titlenormfloatcolor },
 	[SchemeTitleSel]     = { titleselfgcolor,  titleselbgcolor,  titleselbordercolor,  titleselfloatcolor },
-	#if Colorful_Tags_Patch
+	#if COLORFUL_TAGS_PATCH
     [SchemeTagsNormA] = {Red_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
     [SchemeTagsNormB] = {Green_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
     [SchemeTagsNormC] = {Yellow_Color, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
@@ -336,7 +336,7 @@ static char *colors[][ColCount] = {
 	#else
     [SchemeTagsNorm] = {tagsnormfgcolor, tagsnormbgcolor, tagsnormbordercolor, tagsnormfloatcolor},
     [SchemeTagsSel] = {tagsselfgcolor, tagsselbgcolor, tagsselbordercolor, tagsselfloatcolor},
-	#endif // Colorful_Tags_Patch
+	#endif // COLORFUL_TAGS_PATCH
     [SchemeHidNorm] = {hidnormfgcolor, hidnormbgcolor, c000000, c000000},
     [SchemeHidSel] = {hidselfgcolor, hidselbgcolor, c000000, c000000},
     [SchemeUrg] = {urgfgcolor, urgbgcolor, urgbordercolor, urgfloatcolor},

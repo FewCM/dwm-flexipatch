@@ -10,7 +10,7 @@
  * here for grouping purposes.
  */
 
-#define Colorful_Tags_Patch 0
+#define COLORFUL_TAGS_PATCH 0
 /**
  * Bar modules
  */
