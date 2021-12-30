@@ -840,12 +840,12 @@ static Key on_empty_keys[] = {
 
 static Key keys[] = {
 	/* modifier                     key            function                argument */
-	#if Place_Dir_Patch
+	#if PLACE_DIR_PATCH
 	 { MODKEY|ControlMask, 					XK_Left, 				placedir, 							{.i = 0}},  // left
   { MODKEY|ControlMask, 					XK_Right,			placedir, 							{.i = 1}}, // right
   { MODKEY|ControlMask, 					XK_Up,				placedir, 							{.i = 2}},    // up
   { MODKEY|ControlMask, 					XK_Down, 			placedir, 							{.i = 3}},  // down
-	#endif // Place_Dir_Patch
+	#endif // PLACE_DIR_PATCH
 	#if KEYMODES_PATCH
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
 	#endif // KEYMODES_PATCH
