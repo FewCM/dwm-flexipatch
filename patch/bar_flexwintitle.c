@@ -72,78 +72,12 @@ getschemefor(Monitor *m, int group, int activegroup)
 	case GRP_MASTER:
 	case GRP_STACK1:
 	case GRP_STACK2:
-		#if BSTACK_LAYOUT
-		if (m->lt[m->sellt]->arrange == &bstack)
-			return (activegroup ? SchemeFlexActLTR : SchemeFlexInaLTR);
-		#endif // BSTACK_LAYOUT
-		#if BSTACKHORIZ_LAYOUT
-		if (m->lt[m->sellt]->arrange == &bstackhoriz) {
-			if (group == GRP_MASTER)
-				return (activegroup ? SchemeFlexActLTR : SchemeFlexInaLTR);
-			else
-				return (activegroup ? SchemeFlexActTTB : SchemeFlexInaTTB);
-		}
-		#endif // BSTACKHORIZ_LAYOUT
-		#if CENTEREDMASTER_LAYOUT
 		if (m->lt[m->sellt]->arrange == &centeredmaster)
 			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
-		#endif // CENTEREDMASTER_LAYOUT
-		#if CENTEREDFLOATINGMASTER_LAYOUT
-		if (m->lt[m->sellt]->arrange == &centeredfloatingmaster)
-			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
-		#endif // CENTEREDFLOATINGMASTER_LAYOUT
-		#if COLUMNS_LAYOUT
-		if (m->lt[m->sellt]->arrange == &col) {
-			if (group == GRP_MASTER)
-				return (activegroup ? SchemeFlexActLTR : SchemeFlexInaLTR);
-			else
-				return (activegroup ? SchemeFlexActTTB : SchemeFlexInaTTB);
-		}
-		#endif // COLUMNS_LAYOUT
-		#if DECK_LAYOUT
-		if (m->lt[m->sellt]->arrange == &deck) {
-			if (group == GRP_MASTER)
-				return (activegroup ? SchemeFlexActTTB : SchemeFlexInaTTB);
-			else
-				return (activegroup ? SchemeFlexActMONO : SchemeFlexInaMONO);
-		}
-		#endif // DECK_LAYOUT
-		#if FIBONACCI_DWINDLE_LAYOUT
-		if (m->lt[m->sellt]->arrange == &dwindle)
-			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
-		#endif // FIBONACCI_DWINDLE_LAYOUT
-		#if FIBONACCI_SPIRAL_LAYOUT
-		if (m->lt[m->sellt]->arrange == &spiral)
-			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
-		#endif // FIBONACCI_SPIRAL_LAYOUT
-		#if FLEXTILE_DELUXE_LAYOUT
-		if (m->lt[m->sellt]->arrange == &flextile)
-			return (activegroup ? SchemeFlexActTTB + m->ltaxis[group] : SchemeFlexInaTTB + m->ltaxis[group]);
-		#endif // FLEXTILE_DELUXE_LAYOUT
-		#if GAPPLESSGRID_LAYOUT
 		if (m->lt[m->sellt]->arrange == &gaplessgrid)
 			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
-		#endif // GAPPLESSGRID_LAYOUT
-		#if GRIDMODE_LAYOUT
-		if (m->lt[m->sellt]->arrange == &grid)
-			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
-		#endif // GRIDMODE_LAYOUT
-		#if HORIZGRID_LAYOUT
-		if (m->lt[m->sellt]->arrange == &horizgrid)
-			return (activegroup ? SchemeFlexActHGRD : SchemeFlexInaHGRD);
-		#endif // HORIZGRID_LAYOUT
-		#if NROWGRID_LAYOUT
-		if (m->lt[m->sellt]->arrange == &nrowgrid)
-			return (activegroup ? SchemeFlexActGRD1 : SchemeFlexInaGRD1);
-		#endif // NROWGRID_LAYOUT
-		#if TILE_LAYOUT
 		if (m->lt[m->sellt]->arrange == &tile)
 			return (activegroup ? SchemeTitleNorm : SchemeTitleNorm);
-		#endif // TILE_LAYOUT
-		#if MONOCLE_LAYOUT
-		if (m->lt[m->sellt]->arrange == &monocle)
-			return (activegroup ? SchemeFlexActMONO : SchemeFlexInaMONO);
-		#endif // MONOCLE_LAYOUT
 		return SchemeTitleNorm;
 	case GRP_HIDDEN:
 		return SchemeHidNorm;
@@ -186,18 +120,10 @@ flextitledraw(Monitor *m, Client *c, int unused, int x, int w, int tabscheme, Ar
 	XSetWindowBorder(dpy, c->win, scheme[clientscheme][ColBorder].pixel);
 	if (w <= TEXTW("A") - lrpad + pad) // reduce text padding if wintitle is too small
 		pad = (w - TEXTW("A") + lrpad < 0 ? 0 : (w - TEXTW("A") + lrpad) / 2);
-	#if BAR_CENTEREDWINDOWNAME_PATCH
 	else if (TEXTW(c->name) < w)
 		pad = (w - TEXTW(c->name) + lrpad) / 2;
-	#endif // BAR_CENTEREDWINDOWNAME_PATCH
 
-	#if BAR_WINICON_PATCH
-	drw_text(drw, x, barg->y, w, barg->h, pad + (c->icon ? c->icon->width + ICONSPACING : 0), c->name, 0, False);
-	if (c->icon)
-		drw_img(drw, x + pad, barg->y + (barg->h - c->icon->height) / 2, c->icon, tmpicon);
-	#else
 	drw_text(drw, x, barg->y, w, barg->h, pad, c->name, 0, False);
-	#endif // BAR_WINICON_PATCH
 
 	drawstateindicator(m, c, 1, x + 2, barg->y, w, barg->h, 0, 0, 0);
 
@@ -269,14 +195,6 @@ flextitlecalculate(
 
 		if (i < m->nmaster)
 			clientsnmaster++;
-		#if FLEXTILE_DELUXE_LAYOUT
-		else if (m->nstack) {
-			if (clientsnstack < m->nstack)
-				clientsnstack++;
-			else
-				clientsnstack2++;
-		}
-		#endif // FLEXTILE_DELUXE_LAYOUT
 		else if ((i - m->nmaster) % 2)
 			clientsnstack2++;
 		else
@@ -300,60 +218,13 @@ flextitlecalculate(
 	n = clientsnmaster + clientsnstack + clientsnstack2 + clientsnfloating + clientsnhidden;
 	if (n == 0)
 	 	return 0;
-	#if FLEXTILE_DELUXE_LAYOUT
-	else if (m->lt[m->sellt]->arrange == &flextile) {
-		int layout = m->ltaxis[LAYOUT];
-		if (layout < 0) {
-			mirror = 1;
-			layout *= -1;
-		}
-		if (layout > FLOATING_MASTER) {
-			layout -= FLOATING_MASTER;
-			fixed = 1;
-		}
-
-		if (layout == SPLIT_HORIZONTAL_DUAL_STACK || layout == SPLIT_HORIZONTAL_DUAL_STACK_FIXED)
-			dualstack = 1;
-		else if (layout == SPLIT_CENTERED_VERTICAL && (fixed || n - m->nmaster > 1))
-			center = 1;
-		else if (layout == FLOATING_MASTER)
-			center = 1;
-		else if (layout == SPLIT_CENTERED_HORIZONTAL) {
-			if (fixed || n - m->nmaster > 1)
-				center = 1;
-		}
-	}
-	#endif // FLEXTILE_DELUXE_LAYOUT
-	#if CENTEREDMASTER_LAYOUT
 	else if (m->lt[m->sellt]->arrange == &centeredmaster && (fixed || n - m->nmaster > 1))
 		center = 1;
-	#endif // CENTEREDMASTER_LAYOUT
-	#if CENTEREDFLOATINGMASTER_LAYOUT
-	else if (m->lt[m->sellt]->arrange == &centeredfloatingmaster)
-		center = 1;
-	#endif // CENTEREDFLOATINGMASTER_LAYOUT
 
 	/* Certain layouts have no master / stack areas */
 	if (!m->lt[m->sellt]->arrange                            // floating layout
 		|| (!n || (!fixed && m->nmaster && n <= m->nmaster)) // no master
-		#if MONOCLE_LAYOUT
-		|| m->lt[m->sellt]->arrange == &monocle
-		#endif // MONOCLE_LAYOUT
-		#if GRIDMODE_LAYOUT
-		|| m->lt[m->sellt]->arrange == &grid
-		#endif // GRIDMODE_LAYOUT
-		#if HORIZGRID_LAYOUT
-		|| m->lt[m->sellt]->arrange == &horizgrid
-		#endif // HORIZGRID_LAYOUT
-		#if GAPPLESSGRID_LAYOUT
 		|| m->lt[m->sellt]->arrange == &gaplessgrid
-		#endif // GAPPLESSGRID_LAYOUT
-		#if NROWGRID_LAYOUT
-		|| m->lt[m->sellt]->arrange == &nrowgrid
-		#endif // NROWGRID_LAYOUT
-		#if FLEXTILE_DELUXE_LAYOUT
-		|| (m->lt[m->sellt]->arrange == &flextile && m->ltaxis[LAYOUT] == NO_SPLIT)
-		#endif // FLEXTILE_DELUXE_LAYOUT
 	)
 		fulllayout = 1;
 
@@ -379,11 +250,7 @@ flextitlecalculate(
 		r = num % den; // weight rest width
 		rw = r / n; // rest incr per client
 		rr = r % n; // rest rest
-		#if FLEXTILE_DELUXE_LAYOUT
-		if ((!center && !dualstack) || (center && n <= m->nmaster + (m->nstack ? m->nstack : 1)))
-		#else
 		if ((!center && !dualstack) || (center && n <= m->nmaster + 1))
-		#endif // FLEXTILE_DELUXE_LAYOUT
 		{
 			clientsnstack += clientsnstack2;
 			clientsnstack2 = 0;

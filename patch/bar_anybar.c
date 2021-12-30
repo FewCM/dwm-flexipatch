@@ -13,11 +13,7 @@ managealtbar(Window win, XWindowAttributes *wa)
 	} else if (bar && bar->win) {
 		i = bar->idx + 1;
 		bar->next = ecalloc(1, sizeof(Bar));
-		#if BAR_ANYBAR_TOP_AND_BOTTOM_BARS_PATCH
 		bar->next->topbar = !bar->topbar;
-		#else
-		bar->next->topbar = topbar;
-		#endif // BAR_ANYBAR_TOP_AND_BOTTOM_BARS_PATCH
 		bar = bar->next;
 	}
 	bar->external = 1;

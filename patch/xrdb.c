@@ -48,7 +48,6 @@ loadxrdb()
 				XRDB_LOAD_COLOR("dwm.urgbgcolor", urgbgcolor);
 				XRDB_LOAD_COLOR("dwm.urgbordercolor", urgbordercolor);
 				XRDB_LOAD_COLOR("dwm.urgfloatcolor", urgfloatcolor);
-				#if BAR_FLEXWINTITLE_PATCH
 				XRDB_LOAD_COLOR("dwm.normTTBbgcolor", normTTBbgcolor);
 				XRDB_LOAD_COLOR("dwm.normLTRbgcolor", normLTRbgcolor);
 				XRDB_LOAD_COLOR("dwm.normMONObgcolor", normMONObgcolor);
@@ -82,8 +81,6 @@ loadxrdb()
 				XRDB_LOAD_COLOR("dwm.selDWDLbgcolor", selDWDLbgcolor);
 				XRDB_LOAD_COLOR("dwm.selSPRLbgcolor", selSPRLbgcolor);
 				XRDB_LOAD_COLOR("dwm.selfloatbgcolor", selfloatbgcolor);
-				#endif // BAR_FLEXWINTITLE_PATCH
-				#if BAR_STATUS2D_XRDB_TERMCOLORS_PATCH && BAR_STATUS2D_PATCH
 				XRDB_LOAD_COLOR("color0", termcol0);
 				XRDB_LOAD_COLOR("color1", termcol1);
 				XRDB_LOAD_COLOR("color2", termcol2);
@@ -100,7 +97,6 @@ loadxrdb()
 				XRDB_LOAD_COLOR("color13", termcol13);
 				XRDB_LOAD_COLOR("color14", termcol14);
 				XRDB_LOAD_COLOR("color15", termcol15);
-				#endif // BAR_STATUS2D_XRDB_TERMCOLORS_PATCH
 
 				XrmDestroyDatabase(xrdb);
 			}
@@ -117,9 +113,6 @@ xrdb(const Arg *arg)
 	int i;
 	for (i = 0; i < LENGTH(colors); i++)
 		scheme[i] = drw_scm_create(drw, colors[i],
-		#if BAR_ALPHA_PATCH
-		alphas[i],
-		#endif // BAR_ALPHA_PATCH
 		ColCount
 		);
 	focus(NULL);

@@ -12,10 +12,6 @@ width_taglabels(Bar *bar, BarArg *a)
 
 	for (w = 0, i = 0; i < NUMTAGS; i++) {
 		m->taglabel[i][0] = '\0';
-		#if BAR_HIDEVACANTTAGS_PATCH
-		if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
-			continue;
-		#endif // BAR_HIDEVACANTTAGS_PATCH
 		icon = tagicon(m, i);
 		XClassHint ch = { NULL, NULL };
 		for (c = m->clients; c; c = c->next) {
@@ -63,10 +59,8 @@ draw_taglabels(Bar *bar, BarArg *a)
 		w = TEXTW(m->taglabel[i]);
 		drw_text(drw, x, a->y, w, a->h, lrpad / 2, m->taglabel[i], invert, False);
 		drawindicator(m, NULL, occ, x, a->y, w, a->h, i, -1, invert, tagindicatortype);
-		#if BAR_UNDERLINETAGS_PATCH
 		if (ulineall || m->tagset[m->seltags] & 1 << i)
 			drw_rect(drw, x + ulinepad, bh - ulinestroke - ulinevoffset, w - (ulinepad * 2), ulinestroke, 1, 0);
-		#endif // BAR_UNDERLINETAGS_PATCH
 		x += w;
 	}
 
