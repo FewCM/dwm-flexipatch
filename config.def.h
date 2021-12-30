@@ -28,9 +28,9 @@ static const char dwmdir[]               = "dwm";
 static const char localshare[]           = ".local/share";
 #endif // AUTOSTART_PATCH
 #if BAR_ANYBAR_PATCH
-static const int usealtbar               = 1;        /* 1 means use non-dwm status bar */
+static const int usealtbar               = 0;        /* 1 means use non-dwm status bar */
 static const char *altbarclass           = "Polybar"; /* Alternate bar class name */
-static const char *altbarcmd             = "$HOME/bar.sh"; /* Alternate bar launch command */
+static const char *altbarcmd             = "$HOME/.local/bin/dwm/dwmbar"; /* Alternate bar launch command */
 #endif // BAR_ANYBAR_PATCH
 #if BAR_HOLDBAR_PATCH
 static const int showbar                 = 0;   /* 0 means no bar */
@@ -418,7 +418,7 @@ static const char *layoutmenu_cmd = "layoutmenu.sh";
 static const char *const autostart[] = {
 	"sh", "-c", "$HOME/.local/bin/monitors.sh", NULL,
 	"sh", "-c", "$HOME/.local/bin/dwm/dwmstatusbar", NULL,
-	"sh", "-c", "$HOME/.local/bin/dwm/dwmbar", NULL,
+	//"sh", "-c", "$HOME/.local/bin/dwm/dwmbar", NULL,
 	NULL /* terminate */
 };
 #endif // COOL_AUTOSTART_PATCH
@@ -545,8 +545,29 @@ static const Rule rules[] = {
 #if PERTAG_PATCH
 static const MonitorRule monrules[] = {
 	/* monitor  tag   layout  mfact  nmaster  showbar  topbar */
-	{  1,       -1,   2,      -1,    -1,      -1,      -1     }, // use a different layout for the second monitor
-	{  -1,      -1,   0,      -1,    -1,      -1,      -1     }, // default
+	//{  1,       -1,   2,      -1,    -1,      -1,      -1     }, // use a different layout for the second monitor
+	//{  -1,      -1,   0,      -1,    -1,      -1,      -1     }, // default
+	{   -1,       1,   0,      -1,    -1,      -1,      -1    }, // mon#0 tag#1 : default
+    {   -1,       2,   0,      -1,    -1,      -1,      -1     }, // mon#0 tag#2 : default
+    {   -1,       3,   0,      -1,    -1,      -1,     -1     }, // mon#0 tag#3 : default
+    {   -1,       4,   0,      -1,    -1,      -1,      1     }, // mon#0 tag#4 : default
+    {   -1,       5,   0,      -1,    -1,      -1,      1     }, // mon#0 tag#5 : default
+    {   -1,       6,   0,      -1,    -1,      -1,      -1     }, // mon#0 tag#6 : default
+    {   -1,       7,   0,      -1,    -1,      -1,      -1     }, // mon#0 tag#7 : default
+    {   -1,       8,   0,      -1,    -1,      -1,      -1     }, // mon#0 tag#8 : default
+    {   -1,       9,   0,      -1,    -1,      -1,      -1     }, // mon#0 tag#9 : default
+    {   -1,       0,   9,      -1,    -1,      -1,      -1     }, // mon#0 tag#0 : grid layout (#9) - nice for winview
+
+    {   1,       1,   0,      -1,    -1,      -1,      -1     }, // mon#1 tag#1 : default
+    {   1,       2,   0,      -1,    -1,      -1,      -1     }, // mon#1 tag#2 : default
+    {   1,       3,   0,      -1,    -1,      -1,      -1     }, // mon#1 tag#3 : default
+    {   1,       4,   0,      -1,    -1,      -1,      -1     }, // mon#1 tag#4 : default
+    {   1,       5,   0,      -1,    -1,      0,      -1     }, // mon#1 tag#5 : default
+    {   1,       6,   0,      -1,    -1,      0,      -1     }, // mon#1 tag#6 : default
+    {   1,       7,   0,      -1,    -1,      0,      -1     }, // mon#1 tag#7 : default
+    {   1,       8,   0,      -1,    -1,      0,      -1     }, // mon#1 tag#8 : default
+    {   1,       9,   0,      -1,    -1,      -1,      -1     }, // mon#1 tag#9 : default
+    {   1,       0,   9,      -1,    -1,      -1,      -1     }, // mon#1 tag#0 : grid layout (#9) - nice for winview
 };
 #else
 static const MonitorRule monrules[] = {
@@ -1019,14 +1040,14 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_j,          pushdown,               {0} },
 	{ MODKEY|ControlMask,           XK_k,          pushup,                 {0} },
 	#endif // PUSH_PATCH / PUSH_NO_MASTER_PATCH
-	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
-	{ MODKEY,                       XK_d,          incnmaster,             {.i = -1 } },
+	{ Mod1Mask,                       XK_i,          incnmaster,             {.i = +1 } },
+	{ Mod1Mask,                       XK_d,          incnmaster,             {.i = -1 } },
 	#if FLEXTILE_DELUXE_LAYOUT
 	{ MODKEY|ControlMask,           XK_i,          incnstack,              {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_u,          incnstack,              {.i = -1 } },
 	#endif // FLEXTILE_DELUXE_LAYOUT
-	{ MODKEY,                       XK_h,          setmfact,               {.f = -0.05} },
-	{ MODKEY,                       XK_l,          setmfact,               {.f = +0.05} },
+	{ Mod1Mask,                       XK_comma,          setmfact,               {.f = -0.05} },
+	{ Mod1Mask,                       XK_period,          setmfact,               {.f = +0.05} },
 	#if CFACTS_PATCH
 	{ MODKEY|ShiftMask,             XK_h,          setcfact,               {.f = +0.25} },
 	{ MODKEY|ShiftMask,             XK_l,          setcfact,               {.f = -0.25} },
