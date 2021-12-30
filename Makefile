@@ -65,6 +65,8 @@ endif
 	mkdir -p /usr/share/xsessions
 	cp -f dwm.desktop /usr/share/xsessions
 	chmod 644 /usr/share/xsessions/dwm.desktop
+	cp -f xinitrc.desktop /usr/share/xsessions
+	chmod 644 /usr/share/xsessions/xinitrc.desktop
 	cp -f dwm-session-helper ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm-session-helper
 	
@@ -74,6 +76,7 @@ uninstall:
 		${DESTDIR}${PREFIX}/bin/dwm-msg\
 		${DESTDIR}${PREFIX}/bin/dwmc\
 		${DESTDIR}${PREFIX}/bin/dwm-session-helper\
-		/usr/share/xsessions/dwm.desktop
+		/usr/share/xsessions/dwm.desktop\
+		/usr/share/xsessions/xinitrc.desktop
 
 .PHONY: all options clean dist install uninstall

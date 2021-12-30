@@ -4,9 +4,37 @@
 static const unsigned int borderpx       = 3;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
 static const int swallowfloating         = 0;   /* 1 means swallow floating windows by default */
+<<<<<<< HEAD
 static const int usealtbar               = 1;        /* 1 means use non-dwm status bar */
 static const char *altbarclass           = "Polybar"; /* Alternate bar class name */
 static const char *altbarcmd             = "$HOME/bar.sh"; /* Alternate bar launch command */
+=======
+#endif // SWALLOW_PATCH
+#if NO_MOD_BUTTONS_PATCH
+static int nomodbuttons                  = 1;   /* allow client mouse button bindings that have no modifier */
+#endif // NO_MOD_BUTTONS_PATCH
+#if VANITYGAPS_PATCH
+static const unsigned int gappih         = 0;  /* horiz inner gap between windows */
+static const unsigned int gappiv         = 0;  /* vert inner gap between windows */
+static const unsigned int gappoh         = 0;  /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov         = 0;  /* vert outer gap between windows and screen edge */
+static const int smartgaps_fact          = 1;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
+#endif // VANITYGAPS_PATCH
+#if AUTOSTART_PATCH
+static const char autostartblocksh[]     = "autostart_blocking.sh";
+static const char autostartsh[]          = "autostart.sh";
+static const char dwmdir[]               = "dwm";
+static const char localshare[]           = ".local/share";
+#endif // AUTOSTART_PATCH
+#if BAR_ANYBAR_PATCH
+static const int usealtbar               = 0;        /* 1 means use non-dwm status bar */
+static const char *altbarclass           = "Polybar"; /* Alternate bar class name */
+static const char *altbarcmd             = "$HOME/.local/bin/dwm/dwmbar"; /* Alternate bar launch command */
+#endif // BAR_ANYBAR_PATCH
+#if BAR_HOLDBAR_PATCH
+static const int showbar                 = 0;   /* 0 means no bar */
+#else
+>>>>>>> 1f23200
 static const int showbar                 = 1;   /* 0 means no bar */
 static const int topbar                  = 1;   /* 0 means bottom bar */
 static const int focusonwheel            = 0;
@@ -221,7 +249,7 @@ static char *colors[][ColCount] = {
 static const char *const autostart[] = {
 	"sh", "-c", "$HOME/.local/bin/monitors.sh", NULL,
 	"sh", "-c", "$HOME/.local/bin/dwm/dwmstatusbar", NULL,
-	"sh", "-c", "$HOME/.local/bin/dwm/dwmbar", NULL,
+	//"sh", "-c", "$HOME/.local/bin/dwm/dwmbar", NULL,
 	NULL /* terminate */
 };
 
@@ -328,8 +356,29 @@ static const Rule rules[] = {
 
 static const MonitorRule monrules[] = {
 	/* monitor  tag   layout  mfact  nmaster  showbar  topbar */
-	{  1,       -1,   2,      -1,    -1,      -1,      -1     }, // use a different layout for the second monitor
-	{  -1,      -1,   0,      -1,    -1,      -1,      -1     }, // default
+	//{  1,       -1,   2,      -1,    -1,      -1,      -1     }, // use a different layout for the second monitor
+	//{  -1,      -1,   0,      -1,    -1,      -1,      -1     }, // default
+	{   -1,       1,   0,      -1,    -1,      -1,      -1    }, // mon#0 tag#1 : default
+    {   -1,       2,   0,      -1,    -1,      -1,      -1     }, // mon#0 tag#2 : default
+    {   -1,       3,   0,      -1,    -1,      -1,     -1     }, // mon#0 tag#3 : default
+    {   -1,       4,   0,      -1,    -1,      -1,      1     }, // mon#0 tag#4 : default
+    {   -1,       5,   0,      -1,    -1,      -1,      1     }, // mon#0 tag#5 : default
+    {   -1,       6,   0,      -1,    -1,      -1,      -1     }, // mon#0 tag#6 : default
+    {   -1,       7,   0,      -1,    -1,      -1,      -1     }, // mon#0 tag#7 : default
+    {   -1,       8,   0,      -1,    -1,      -1,      -1     }, // mon#0 tag#8 : default
+    {   -1,       9,   0,      -1,    -1,      -1,      -1     }, // mon#0 tag#9 : default
+    {   -1,       0,   9,      -1,    -1,      -1,      -1     }, // mon#0 tag#0 : grid layout (#9) - nice for winview
+
+    {   1,       1,   0,      -1,    -1,      -1,      -1     }, // mon#1 tag#1 : default
+    {   1,       2,   0,      -1,    -1,      -1,      -1     }, // mon#1 tag#2 : default
+    {   1,       3,   0,      -1,    -1,      -1,      -1     }, // mon#1 tag#3 : default
+    {   1,       4,   0,      -1,    -1,      -1,      -1     }, // mon#1 tag#4 : default
+    {   1,       5,   0,      -1,    -1,      0,      -1     }, // mon#1 tag#5 : default
+    {   1,       6,   0,      -1,    -1,      0,      -1     }, // mon#1 tag#6 : default
+    {   1,       7,   0,      -1,    -1,      0,      -1     }, // mon#1 tag#7 : default
+    {   1,       8,   0,      -1,    -1,      0,      -1     }, // mon#1 tag#8 : default
+    {   1,       9,   0,      -1,    -1,      -1,      -1     }, // mon#1 tag#9 : default
+    {   1,       0,   9,      -1,    -1,      -1,      -1     }, // mon#1 tag#0 : grid layout (#9) - nice for winview
 };
 
 
@@ -441,10 +490,49 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Right,      focusstack,             {.i = -1 } }, // right
 	{ MODKEY,                       XK_Up,         focusstack,             {.i = +2 } }, // up
 	{ MODKEY,                       XK_Down,       focusstack,             {.i = -2 } }, // down
+<<<<<<< HEAD
 	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
 	{ MODKEY,                       XK_d,          incnmaster,             {.i = -1 } },
 	{ MODKEY,                       XK_h,          setmfact,               {.f = -0.05} },
 	{ MODKEY,                       XK_l,          setmfact,               {.f = +0.05} },
+=======
+	#endif // STACKER_PATCH
+	#if FOCUSDIR_PATCH
+	{ MODKEY,                       XK_Left,       focusdir,               {.i = 0 } }, // left
+	{ MODKEY,                       XK_Right,      focusdir,               {.i = 1 } }, // right
+	{ MODKEY,                       XK_Up,         focusdir,               {.i = 2 } }, // up
+	{ MODKEY,                       XK_Down,       focusdir,               {.i = 3 } }, // down
+	#endif // FOCUSDIR_PATCH
+	#if SWAPFOCUS_PATCH && PERTAG_PATCH
+	{ MODKEY,                       XK_s,          swapfocus,              {.i = -1 } },
+	#endif // SWAPFOCUS_PATCH
+	#if SWITCHCOL_PATCH
+	{ MODKEY,                       XK_v,          switchcol,              {0} },
+	#endif // SWITCHCOL_PATCH
+	#if ROTATESTACK_PATCH
+	{ MODKEY|Mod4Mask,              XK_j,          rotatestack,            {.i = +1 } },
+	{ MODKEY|Mod4Mask,              XK_k,          rotatestack,            {.i = -1 } },
+	#endif // ROTATESTACK_PATCH
+	#if INPLACEROTATE_PATCH
+	{ MODKEY|Mod4Mask,              XK_j,          inplacerotate,          {.i = +2 } }, // same as rotatestack
+	{ MODKEY|Mod4Mask,              XK_k,          inplacerotate,          {.i = -2 } }, // same as reotatestack
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_j,          inplacerotate,          {.i = +1} },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_k,          inplacerotate,          {.i = -1} },
+	#endif // INPLACEROTATE_PATCH
+	#if PUSH_PATCH || PUSH_NO_MASTER_PATCH
+	{ MODKEY|ControlMask,           XK_j,          pushdown,               {0} },
+	{ MODKEY|ControlMask,           XK_k,          pushup,                 {0} },
+	#endif // PUSH_PATCH / PUSH_NO_MASTER_PATCH
+	{ Mod1Mask,                       XK_i,          incnmaster,             {.i = +1 } },
+	{ Mod1Mask,                       XK_d,          incnmaster,             {.i = -1 } },
+	#if FLEXTILE_DELUXE_LAYOUT
+	{ MODKEY|ControlMask,           XK_i,          incnstack,              {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_u,          incnstack,              {.i = -1 } },
+	#endif // FLEXTILE_DELUXE_LAYOUT
+	{ Mod1Mask,                       XK_comma,          setmfact,               {.f = -0.05} },
+	{ Mod1Mask,                       XK_period,          setmfact,               {.f = +0.05} },
+	#if CFACTS_PATCH
+>>>>>>> 1f23200
 	{ MODKEY|ShiftMask,             XK_h,          setcfact,               {.f = +0.25} },
 	{ MODKEY|ShiftMask,             XK_l,          setcfact,               {.f = -0.25} },
 	{ MODKEY|ShiftMask,             XK_o,          setcfact,               {0} },
