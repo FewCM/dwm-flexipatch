@@ -139,7 +139,7 @@ enum {
 	SchemeSel,
 	SchemeTitleNorm,
 	SchemeTitleSel,
-	#if Colorful_Tags_Patch
+	#if COLORFUL_TAGS_PATCH
 	SchemeTagsNormA,
 	SchemeTagsNormB,
 	SchemeTagsNormC,
@@ -162,7 +162,7 @@ enum {
 	#else
 	SchemeTagsNorm,
 	SchemeTagsSel,
-	#endif // Colorful_Tags_Patch
+	#endif // COLORFUL_TAGS_PATCH
 	SchemeHidNorm,
 	SchemeHidSel,
 	SchemeUrg,

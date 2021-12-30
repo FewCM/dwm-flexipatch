@@ -11,8 +11,8 @@
  */
 
 
-#define Colorful_Tags_Patch 1
-#define PLACE_DIR_PATCH 0
+#define PLACE_DIR_PATCH 1
+#define COLORFUL_TAGS_PATCH 1
 /**
  * Bar modules
  */
