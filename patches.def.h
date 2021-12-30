@@ -9,9 +9,10 @@
  * Although layouts typically come as patches they are differentiated
  * here for grouping purposes.
  */
-#define Place_Dir_Patch 1
+
 
 #define Colorful_Tags_Patch 1
+#define PLACE_DIR_PATCH 0
 /**
  * Bar modules
  */

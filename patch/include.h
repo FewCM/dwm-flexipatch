@@ -2,7 +2,7 @@
 #include "bar_indicators.h"
 #include "bar_tagicons.h"
 
-#if Place_Dir_Patch
+#if PLACE_DIR_PATCH
 #include "place_dir.h"
 #endif
 #if BAR_ALPHA_PATCH

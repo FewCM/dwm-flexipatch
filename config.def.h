@@ -961,12 +961,12 @@ static Key keys[] = {
 	{ MODKEY,                     	XK_r,  					   spawn,       			 SHCMD("$HOME/.config/rofi/bin/asroot.sh") },
 	{ MODKEY,                     	XK_n,  					   spawn,       			 SHCMD("$HOME/.config/rofi/bin/network.sh") },
 	{ MODKEY,                     	XK_w,  					   spawn,       			 SHCMD("$HOME/.config/rofi/bin/windows.sh") },
-	#if Place_Dir_Patch
-	{ MODKEY|ControlMask, 					XK_Left, 			 placedir, 							 {.i = 0}},  // left
-  { MODKEY|ControlMask, 					XK_Right,			 placedir, 							 {.i = 1}}, // right
-  { MODKEY|ControlMask, 					XK_Up,				 placedir, 							 {.i = 2}},    // up
-  { MODKEY|ControlMask, 					XK_Down, 			 placedir, 							 {.i = 3}},  // down
-	#endif // Place_Dir_Patch
+	#if PLACE_DIR_PATCH
+	{ MODKEY|ControlMask, 					XK_Left, 				placedir, 							{.i = 0}},  // left
+  { MODKEY|ControlMask, 					XK_Right,				placedir, 							{.i = 1}}, // right
+  { MODKEY|ControlMask, 					XK_Up,					placedir, 							{.i = 2}},    // up
+  { MODKEY|ControlMask, 					XK_Down, 				placedir, 							{.i = 3}},  // down
+	#endif // PLACE_DIR_PATCH
 	#if KEYMODES_PATCH
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
 	#endif // KEYMODES_PATCH
