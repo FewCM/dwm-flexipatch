@@ -28,9 +28,9 @@ static const char dwmdir[]               = "dwm";
 static const char localshare[]           = ".local/share";
 #endif // AUTOSTART_PATCH
 #if BAR_ANYBAR_PATCH
-static const int usealtbar               = 0;        /* 1 means use non-dwm status bar */
+static const int usealtbar               = 1;        /* 1 means use non-dwm status bar */
 static const char *altbarclass           = "Polybar"; /* Alternate bar class name */
-static const char *altbarcmd             = "$HOME/.local/bin/dwm/dwmbar"; /* Alternate bar launch command */
+static const char *altbarcmd             = "$HOME/bar.sh"; /* Alternate bar launch command */
 #endif // BAR_ANYBAR_PATCH
 #if BAR_HOLDBAR_PATCH
 static const int showbar                 = 0;   /* 0 means no bar */
@@ -418,7 +418,7 @@ static const char *layoutmenu_cmd = "layoutmenu.sh";
 static const char *const autostart[] = {
 	"sh", "-c", "$HOME/.local/bin/monitors.sh", NULL,
 	"sh", "-c", "$HOME/.local/bin/dwm/dwmstatusbar", NULL,
-	//"sh", "-c", "$HOME/.local/bin/dwm/dwmbar", NULL,
+	"sh", "-c", "$HOME/.local/bin/dwm/dwmbar", NULL,
 	NULL /* terminate */
 };
 #endif // COOL_AUTOSTART_PATCH
