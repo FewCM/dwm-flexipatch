@@ -426,10 +426,12 @@ static const char *const autostart[] = {
 #if SCRATCHPADS_PATCH
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL};
 const char *spcmd2[] = {"st", "-g", "150x35", "-c", "spcal", "-n", "spcal", "-e", "calcurse", NULL};
+const char *spcmd3[] = {"st", "-g", "150x35", "-c", "spmusic", "-n", "spmusic", "-e", "ncmpcpp", NULL};
 static Sp scratchpads[] = {
   /* name          cmd  */
   {"spterm", spcmd1},
   {"spcal", spcmd2},
+    {"spmusic", spcmd3},
 };
 #endif // SCRATCHPADS_PATCH
 
@@ -536,8 +538,9 @@ static const Rule rules[] = {
 	RULE(.instance = "font-manager", .class = "Font-manager", .tags = 1 << 6, .switchtag = 2, .isfloating = 1, .floatpos = "50% 0% 50% 50%")
 	RULE(.instance = "spotify", .class = "Spotify", .tags = 1 << 5, .switchtag = 1)
 	#if SCRATCHPADS_PATCH
-  RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1, .isterminal = 1)
-  RULE(.instance = "spcal", .tags = SPTAG(1), .isfloating = 1, .isterminal = 1)
+	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1, .isterminal = 1)
+	RULE(.instance = "spcal", .tags = SPTAG(1), .isfloating = 1, .isterminal = 1)
+	RULE(.instance = "spmusic", .tags = SPTAG(2), .isfloating = 1, .isterminal = 1)
 	#endif // SCRATCHPADS_PATCH
 };
 
@@ -961,8 +964,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_backslash,  spawn,                  SHCMD("$HOME/.local/bin/dwm/dwmreload") },
 	//music control
 	{ 0,                       			XF86XK_AudioPrev,  spawn,              SHCMD("playerctl previous") },
-	{ 0,                       			XF86XK_AudioPrev,  spawn,              SHCMD("playerctl next") },
-	{ 0,                       			XF86XK_AudioPrev,  spawn,              SHCMD("playerctl play-pause") },
+	{ 0,                       			XF86XK_AudioNext,  spawn,              SHCMD("playerctl next") },
+	{ 0,                       			XF86XK_AudioPlay,  spawn,              SHCMD("playerctl play-pause") },
 	{ 0,                       			XF86XK_AudioMute,  spawn,              SHCMD("$HOME/.local/bin/pulseaudio-control togmute") },
 	{ 0,                       			XF86XK_AudioLowerVolume,  spawn,       SHCMD("$HOME/.local/bin/pulseaudio-control down") },
 	{ 0,                       			XF86XK_AudioRaiseVolume,  spawn,       SHCMD("$HOME/.local/bin/pulseaudio-control up") },
@@ -976,6 +979,7 @@ static Key keys[] = {
 	{ MODKEY,                     	XK_b,  					   spawn,       			 SHCMD("microsoft-edge-stable") },
 	{ MODKEY,                     	XK_t,  					   spawn,       			 SHCMD("$HOME/.local/bin/dwm/dwmterm") },
 	{ MODKEY,                     	XK_a,  					   spawn,       			 SHCMD("$HOME/.local/bin/greenclip_dmenu.sh") },
+	{ MODKEY|ShiftMask,    	XK_l,  					   spawn,       			 SHCMD("$HOME/.local/bin/lock.sh") },
 	//rofi
 	{ MODKEY,                     	XK_l,  					   spawn,       			 SHCMD("$HOME/.config/rofi/bin/launcher.sh") },
 	{ MODKEY,                     	XK_x,  					   spawn,       			 SHCMD("$HOME/.config/rofi/bin/powermenu.sh") },
